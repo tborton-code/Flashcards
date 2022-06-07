@@ -16,8 +16,21 @@ export default function CardForm({card, submitHandler, cancelHandler}) {
 
   const submit = (event) => {
     event.preventDefault();
-    submitHandler(cardInfo);
-    setCardInfo({});
+    if (validate()){
+      submitHandler(cardInfo);
+      setCardInfo({})
+    } else {
+      window.alert("Please fill in all fields.")
+    }
+  };
+
+  //create validation function to see whether cardInfo is empty
+  const validate = () => {
+    if (!cardInfo || cardInfo.front === "" || cardInfo.back === "") {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   return (

@@ -46,7 +46,7 @@ export default function DeckView(){
             <h1>{deck.name}</h1>
             <p>{deck.description}</p>
             <Link to={`/decks/${deckId}/edit`} className="btn btn-secondary">Edit Deck</Link>
-            <Link to={`decks/${deckId}/study`} className="btn btn-secondary">Study Deck</Link>
+            <Link to={`${deckId}/study`} className="btn btn-secondary">Study Deck</Link>
             <Link to={`/decks/${deckId}/cards/new`} className="btn btn-secondary">Add Cards</Link>
             <button className="btn btn-danger" onClick={() => handleDeleteDeck(deckId)}>Delete Deck</button>
         </div>
