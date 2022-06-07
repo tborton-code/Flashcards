@@ -1,5 +1,4 @@
 import React from "react";
-import { Breadcrumb } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { createDeck } from "../utils/api";
 import DeckForm from "./DeckForm";
@@ -15,14 +14,14 @@ export default function NewDeck(){
         callCreateDeck();
     }
     return (
-        <>
-        <Breadcrumb>
-            <Breadcrumb.Item><Link to="/">🏠 Home</Link></Breadcrumb.Item>
-            <Breadcrumb.Item active>Create Deck</Breadcrumb.Item>
-        </Breadcrumb>
+        <div>
+        <div className="breadcrumb">
+            <Link to="/">🏠 Home</Link><p>&nbsp;/&nbsp;</p>
+            <span className="breadcrumb-item active">Create Deck</span>
+        </div>
         <h1>Create Deck</h1>
         <DeckForm submitHandler={submitHandler}/>
-        </>
+        </div>
     )
     
     

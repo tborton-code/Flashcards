@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Button, Form } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 
 export default function DeckForm({deck, submitHandler}){
     const [deckInfo, setDeckInfo] = useState(deck)
@@ -20,28 +19,33 @@ export default function DeckForm({deck, submitHandler}){
     }
 
     return (
-    <Form onSubmit={submit}>
-        <Form.Group controlId="formDeckName">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="name" 
-            placeholder="Deck Name" 
-            value={deckInfo?.name || ""} 
-            name="name"
-            onChange={updateForm}/>
-        </Form.Group>
-        <Form.Group controlId="formDeckDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="description" 
-            placeholder="Enter a brief description of the deck" 
-            value={deckInfo?.description || ""} 
-            name="description"
-            onChange={updateForm}/>
-        </Form.Group>
-        <Button type="submit" >
-            Cancel
-        </Button>
-        <Button type="submit" >
-            Submit
-        </Button>
-    </Form>)
+    <div>
+        <form onSubmit={submit}>
+            <div className="form-group mb-3">
+                <label>Name</label>
+                <input type="text"
+                className="form-control" 
+                placeholder="Deck Name" 
+                value={deckInfo?.name || ""} 
+                name="name"
+                onChange={updateForm}/>
+            </div>
+            <div className="form-group mb-3">
+                <label>Description</label>
+                <textarea as="textarea" 
+                className="form-control"
+                rows="3" 
+                placeholder="Enter a brief description of the deck" 
+                value={deckInfo?.description || ""} 
+                name="description"
+                onChange={updateForm}/>
+            </div>
+            <Link to="/" className="btn btn-secondary">
+                Cancel
+            </Link>
+            <button className="btn btn-primary" type="submit" >
+                Submit
+            </button>
+        </form>
+    </div>)
 }

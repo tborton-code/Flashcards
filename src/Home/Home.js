@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom"
 import {listDecks} from "../utils/api";
 import DeckItem from "../Decks/DeckItem";
-import {Button} from "react-bootstrap";
 import { deleteDeck } from "../utils/api";
 
 
@@ -38,7 +37,7 @@ export default function Home() {
 return (
     <div>
         <div>
-            <Link to="/decks/new"><Button>Create Deck</Button></Link>
+            <Link to="/decks/new" className="btn btn-secondary">➕ Create Deck</Link>
         </div>
         <div>
             <ul style={{"listStyleType":"none"}}>

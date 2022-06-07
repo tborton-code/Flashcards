@@ -1,21 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {Card, Button} from "react-bootstrap";
 
-
-export default function DeckItem({deck, handleDeleteDeck}){
+export default function DeckItem ({deck, handleDeleteDeck}){
     return (
-        <li>
-            <Card>
-                <Card.Body>
-                    <Card.Title>{deck.name}</Card.Title>
-                    <Card.Subtitle>{deck.cards.length} cards in deck</Card.Subtitle>
-                    <Card.Text>{deck.description}</Card.Text>
-                    <Link to={`/decks/${deck.id}`}><Button>View</Button></Link>
-                    <Link to={`/decks/${deck.id}/study`}><Button>Study</Button></Link>
-                    <Button onClick={handleDeleteDeck}>🗑️ Delete</Button>
-                </Card.Body>
-            </ Card>
-        </li>
+    <div className="card" style={{ width: 'auto' }}>
+    <div className="card-body">
+        <div className="row">
+            <div className="col-md-10">
+            <h1 className="card-title">{deck.name}</h1>
+            </div>
+            <div className="col-md-2">
+            <h5 className="card-subtitle">{deck.cards.length} cards</h5>
+            </div>
+        </div>
+      <p className="card-text">
+        {deck.description}
+      </p>
+      <div className="row">
+      <div className="col-md-10">
+      <Link to={`/decks/${deck.id}`} className="btn btn-secondary">View</Link>
+      <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">Study</Link>
+      </div>
+      <div className="col-md-2">
+      <button className="btn btn-danger" onClick={() => handleDeleteDeck(deck.id)}>Delete</button>
+      </div>
+      </div>
+    </div>
+  </div>
     )
-}
+};

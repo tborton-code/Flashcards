@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useParams, Link } from "react-router-dom";
 import { readDeck } from "../utils/api";
-import { Breadcrumb } from "react-bootstrap";
 import StudyCard from "./StudyCard";
 
 
@@ -13,6 +13,7 @@ export default function StudyDeck(){
     const [cardInfo, setCardInfo] = useState({});
     const [currCardNum, setCurrCardNum] = useState(1);
     const [index, setIndex] = useState(0);
+    const history = useHistory();
 
 
     function flipHandler(){
@@ -31,7 +32,8 @@ export default function StudyDeck(){
             setCardInfo(currDeck.cards[index]);
         } else {
             const response = window.confirm("Restart cards? \n\n Click 'Cancel' to return to the home page.")
-            if (!response){History.push("/")}
+            console.log(response);
+            if (!response){history.push("/")}
             else {setFlipped(false); 
                 setCurrCardNum(1);
                 setIndex(0); 
@@ -54,12 +56,14 @@ export default function StudyDeck(){
     },[deckId]);
 
     return (
-        <>
-        <Breadcrumb>
-            <Breadcrumb.Item><Link to="/">🏠 Home</Link></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to={`/decks/${deckId}`}>{`${currDeck.name}`}</Link></Breadcrumb.Item>
-            <Breadcrumb.Item active>Study</Breadcrumb.Item>
-        </Breadcrumb>
+        <div>
+        <div className="breadcrumb">
+            <Link to="/">🏠 Home</Link><p>&nbsp;/&nbsp;</p>
+            <Link to={`/decks/${deckId}`}>{`${currDeck.name}`}</Link><p>&nbsp;/&nbsp;</p>
+            <span className="breadcrumb-item active">Study</span>
+        </div>
+        <h1>Study: {currDeck.name}</h1>
+
             {deckLength>=3 && 
                 (
                     <StudyCard 
@@ -71,15 +75,15 @@ export default function StudyDeck(){
                     cardInfo={cardInfo}
                     />
                 )}
-                {deckLength<3 &&
+                {(deckLength<3 || !deckLength) &&
                     (
                         <div>
-                            <h1>{currDeck.name}: Study</h1>
                             <h2>Not enough cards.</h2>
                             <p>{`You need to have at least three cards to study. There are ${deckLength} cards in this deck.`}</p>
+                            <Link to="/decks/:deckId/cards/new" className="btn btn-primary">➕ Add Cards</Link>
                         </div>
                     )
                 }
-        </>
+        </div>
     )
 }

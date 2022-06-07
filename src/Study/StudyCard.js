@@ -1,26 +1,23 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
 
 export default function StudyCard({deckLength, flipped, flipHandler, advanceCard, currCardNum, cardInfo}) {
     return (
-        <Card>
-            <Card.Body>
-                <Card.Title>{`${currCardNum} of ${deckLength}`}</Card.Title>
+        <div className="card">
+                <h3 className="card-title">{`Card ${currCardNum} of ${deckLength}`}</h3>
                 {!flipped && (
-                    <Card.Text>
+                    <p className="card-text">
                         {cardInfo.front}
-                    </Card.Text>
+                    </p>
                 )}
                 {flipped && (
-                    <Card.Text>
+                    <p className="card-text">
                         {cardInfo.back}
-                    </Card.Text>
+                    </p>
                 )}
-                <Button onClick={flipHandler}>Flip</Button>
+                <button className="btn btn-secondary" onClick={flipHandler}>Flip</button>
                 {flipped && (
-                    <Button onClick={advanceCard}>Next Card</Button>
+                    <button className="btn btn-primary" onClick={advanceCard}>Next Card</button>
                 )}
-            </Card.Body>
-        </Card>
+        </div>
     )
 }
