@@ -41,8 +41,8 @@ return (
         </div>
         <div>
             <ul style={{"listStyleType":"none"}}>
-                {decks.map(deck =>
-                    <DeckItem deck={deck} handleDeleteDeck={handleDeleteDeck}/>)}
+                {decks.map((deck,index) =>
+                    <DeckItem deck={deck} handleDeleteDeck={handleDeleteDeck} key={index}/>)}
             </ul>
         </div>
     </div>
